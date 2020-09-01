@@ -76,7 +76,7 @@ def object_recog(frame):
             confidence = scores[classID]
             # Parse the detections on the basis of confidence score and class-id
             # print(confidence)
-            if confidence > 0.3 and classID == 9:
+            if confidence > 0.5 and classID == 9:
                 frame_height, frame_width = frame.shape[:2]
                 box = detection[0:4] * \
                     np.array([frame_width, frame_height,
@@ -96,14 +96,10 @@ def object_recog(frame):
                 (x, y) = (detected_bboxes[i][0], detected_bboxes[i][1])
                 (w, h) = (detected_bboxes[i][2], detected_bboxes[i][3])
                 # visualize and draw the result on the window screen
-                # cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cropped_image= frame[y-10:y+h, x-10:x+w]
-                # text = LABELS[detected_classIDs[i]]
-                # if [detected_classIDs[i]] == [9]:
-                #     text = "light"
         return frame, cropped_image
     except Exception as e:
-        # print(e)
         return {},{}
 
 
@@ -111,10 +107,8 @@ def color_recognition(image):
     states = ['Red', 'Red', 'Green', 'off']
     model = load_model('model.h5')
     desired_dim = (32, 32)
-    # img = cv2.imread(file_path)
     img_resized = cv2.resize(image, desired_dim, interpolation=cv2.INTER_LINEAR)
     img_ = np.expand_dims(np.array(img_resized), axis=0)
-
     predicted_state = model.predict_classes(img_)
     for idx in predicted_state:
         return states[idx]

@@ -11,10 +11,7 @@ from keras.models import load_model
 
 
 def network():
-    """
-    Define the network
-    :return:
-    """
+
     model = Sequential()
     model.add(Convolution2D(32, 3, 3, input_shape=(32, 32, 3)))
     model.add(MaxPooling2D((2, 2)))
@@ -27,14 +24,13 @@ def network():
 
 
 def train(file_path, model):
-
     x_,y_ = pickle.load( open(file_path, "rb" ) )
     random_state = 130
     X_train, x_validation, y_train, y_validation = train_test_split(x_, y_, train_size = 0.80,
                                                                     test_size = 0.2,
                                                                     random_state = random_state)
     # preprocess data
-    X_normalized = np.array(X_train / 255.0 - 0.5 )
+    X_normalized = np.array(X_train / 255.0 - 0.5)
     label_binarizer = LabelBinarizer()
     y_one_hot = label_binarizer.fit_transform(y_train)
 
