@@ -11,18 +11,14 @@ from keras.models import load_model
 
 
 def network():
-    """
-    Define the network
-    :return:
-    """
     model = Sequential()
     model.add(Convolution2D(32, 3, 3, input_shape=(32, 32, 3)))
     model.add(MaxPooling2D((2, 2)))
     model.add(Activation('relu'))
     model.add(Flatten())
     model.add(Dense(4))
+    # cos its going to be multi-class classification problem
     model.add(Activation('softmax'))
-
     return model
 
 
@@ -46,3 +42,8 @@ def train(file_path, model):
     return history
 
 
+if __name__ == "__main__":
+    model = network()
+    train_file = "bosch_udacity_train.p"
+    test_file = "bosch_udacity_test.p"
+    train(train_file, model)

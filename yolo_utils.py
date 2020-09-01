@@ -96,11 +96,13 @@ def object_recog(frame):
                 (x, y) = (detected_bboxes[i][0], detected_bboxes[i][1])
                 (w, h) = (detected_bboxes[i][2], detected_bboxes[i][3])
                 # visualize and draw the result on the window screen
-                # cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cropped_image= frame[y-10:y+h, x-10:x+w]
                 # text = LABELS[detected_classIDs[i]]
                 # if [detected_classIDs[i]] == [9]:
                 #     text = "light"
+        # cv2.imshow("crop", cropped_image)
+        # cv2.waitKey()
         return frame, cropped_image
     except Exception as e:
         # print(e)
@@ -119,3 +121,5 @@ def color_recognition(image):
     for idx in predicted_state:
         return states[idx]
 
+
+# pushing code to the code versioning system

@@ -9,8 +9,8 @@ This is main function where execution starts and it read the input image and pre
 '''
 if __name__ == "__main__":
     # Path of the input image
-    
-    image_path = "./test_images/5.JPG"
+
+    image_path = "./test_images/3.JPG"
     # Read of the input images
     image = cv2.imread(image_path)
     # Resize of the input images
