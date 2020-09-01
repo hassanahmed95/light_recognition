@@ -121,5 +121,3 @@ def color_recognition(image):
     for idx in predicted_state:
         return states[idx]
 
-
-# pushing code to the code versioning system
